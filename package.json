@@ -4,6 +4,9 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -13,8 +16,7 @@
   "scripts": {
     "build": "bun build src/index.ts --outdir dist --target bun --format esm && tsc --emitDeclarationOnly",
     "dev": "bun build src/index.ts --outdir dist --target bun --format esm --watch",
-    "clean": "rm -rf dist",
-    "prepare": "bun run build"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@opencode-ai/plugin": "^1.2.24",
