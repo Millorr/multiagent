@@ -6,7 +6,7 @@ export const plugin: Plugin = async (_ctx): Promise<PluginInterface> => {
 
   return {
     name: "multiagent",
-    tools: {
+    tool: {
       task: taskTool,
     },
     hooks: {},

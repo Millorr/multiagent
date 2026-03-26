@@ -3,9 +3,18 @@
   "version": "1.0.0",
   "type": "module",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --target bun",
-    "dev": "bun build src/index.ts --outdir dist --target bun --watch"
+    "build": "bun build src/index.ts --outdir dist --target bun --format esm && tsc --emitDeclarationOnly",
+    "dev": "bun build src/index.ts --outdir dist --target bun --format esm --watch",
+    "clean": "rm -rf dist",
+    "prepare": "bun run build"
   },
   "dependencies": {
     "@opencode-ai/plugin": "^1.2.24",
