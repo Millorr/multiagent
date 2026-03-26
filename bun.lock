@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "omo-categories-subagents",
+      "name": "multiagent",
       "dependencies": {
         "@opencode-ai/plugin": "^1.2.24",
         "@opencode-ai/sdk": "^1.2.24",

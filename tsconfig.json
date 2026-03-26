@@ -5,7 +5,10 @@
     "moduleResolution": "bundler",
     "strict": true,
     "lib": ["ESNext"],
-    "types": ["bun-types"]
+    "types": ["bun-types"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist"
   },
   "include": ["src/**/*"]
 }
