@@ -1,5 +1,19 @@
 import type { SkillResolutionResult } from "../types/skill"
-import { BUILTIN_SKILLS } from "./builtin-skills"
+import { loadBuiltinSkillsFromDisk } from "./builtin-load"
+
+// Cache loaded skills
+let cachedSkills: Record<string, { name: string; description: string; content: string }> | null = null
+
+function getBuiltinSkills(): Record<string, { name: string; description: string; content: string }> {
+  if (!cachedSkills) {
+    const skills = loadBuiltinSkillsFromDisk()
+    cachedSkills = {}
+    for (const skill of skills) {
+      cachedSkills[skill.name] = skill
+    }
+  }
+  return cachedSkills
+}
 
 export async function resolveSkillContent(
   skills: string[],
@@ -11,9 +25,10 @@ export async function resolveSkillContent(
 
   const notFound: string[] = []
   const resolvedContents: string[] = []
+  const builtinSkills = getBuiltinSkills()
 
   for (const skillName of skills) {
-    const builtin = BUILTIN_SKILLS[skillName]
+    const builtin = builtinSkills[skillName]
     if (builtin) {
       resolvedContents.push(builtin.content)
     } else {
@@ -22,7 +37,7 @@ export async function resolveSkillContent(
   }
 
   if (notFound.length > 0) {
-    const available = Object.keys(BUILTIN_SKILLS).join(", ")
+    const available = Object.keys(builtinSkills).join(", ")
     return {
       content: undefined,
       contents: [],
