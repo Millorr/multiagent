@@ -10,7 +10,6 @@ function getBuiltinAgents(): Record<string, AgentConfig> {
     cachedAgents = {}
     for (const agent of agents) {
       cachedAgents[agent.name] = {
-        name: agent.name,
         description: agent.description,
         prompt: agent.prompt,
         mode: "subagent",
